@@ -52,11 +52,11 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            script {
-                sh 'docker rm -f tinyurl_app_test || true'
-            }
-        }
-    }
+    // post {
+    //     always {
+    //         script {
+    //             sh 'docker rm -f tinyurl_app_test || true'
+    //         }
+    //     }
+    // }
 }
