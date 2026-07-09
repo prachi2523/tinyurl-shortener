@@ -43,23 +43,23 @@ pipeline {
             }
         }
 
-        stage('Start Application') {
+        // stage('Start Application') {
 
-            agent any
+        //     agent any
 
-            steps {
-                sh 'docker compose up -d'
-            }
-        }
+        //     steps {
+        //         sh 'docker compose up -d'
+        //     }
+        // }
 
-        stage('Verify Running Containers') {
+        // stage('Verify Running Containers') {
 
-            agent any
+        //     agent any
 
-            steps {
-                sh 'docker ps'
-            }
-        }
+        //     steps {
+        //         sh 'docker ps'
+        //     }
+        // }
 
     }
 
