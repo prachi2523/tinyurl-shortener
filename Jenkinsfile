@@ -43,23 +43,21 @@ pipeline {
             }
         }
 
-        // stage('Start Application') {
+        stage('Run Application') {
+            agent any
 
-        //     agent any
+            steps {
+                sh 'docker run -d --name tinyurl_app_test -p 3000:3000 tinyurl-shortener:latest'
+            }
+        }
 
-        //     steps {
-        //         sh 'docker compose up -d'
-        //     }
-        // }
+        stage('Verify') {
+            agent any
 
-        // stage('Verify Running Containers') {
-
-        //     agent any
-
-        //     steps {
-        //         sh 'docker ps'
-        //     }
-        // }
+            steps {
+                sh 'docker ps'
+            }
+        }
 
     }
 
@@ -74,7 +72,7 @@ pipeline {
         }
 
         always {
-            sh 'docker compose down'
+            sh 'docker rm -f tinyurl_app_test || true'
         }
 
     }
