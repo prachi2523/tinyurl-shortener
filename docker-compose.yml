@@ -29,6 +29,7 @@ services:
 
   app:
     build: .
+    image: tinyurl-shortener:latest
     container_name: tinyurl_app
     ports:
       - "3000:3000"

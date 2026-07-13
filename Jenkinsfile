@@ -30,33 +30,33 @@ pipeline {
         stage('Build Docker Image') {
             agent any
             steps {
-                sh 'docker build -t tinyurl-shortener:latest .'
+                sh 'docker compose build'
             }
         }
 
         stage('Run Application') {
             agent any
             steps {
-                sh 'docker rm -f tinyurl_app_test || true'
-                sh 'docker run -d --name tinyurl_app_test -p 3000:3000 tinyurl-shortener:latest'
+                sh 'docker compose down -v || true'
+                sh 'docker compose up -d'
             }
         }
 
         stage('Verify') {
             agent any
             steps {
-                sh 'docker ps'
+                sh 'docker compose ps'
                 sh 'sleep 5'
                 sh 'curl http://localhost:3000 || true'
             }
         }
     }
 
-    // post {
-    //     always {
-    //         script {
-    //             sh 'docker rm -f tinyurl_app_test || true'
-    //         }
-    //     }
-    // }
+    post {
+        always {
+            script {
+                sh 'docker compose down -v || true'
+            }
+        }
+    }
 }
