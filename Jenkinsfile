@@ -37,6 +37,7 @@ pipeline {
         stage('Run Application') {
             agent any
             steps {
+                sh 'docker rm -f tinyurl_app_test || true'
                 sh 'docker compose down -v || true'
                 sh 'docker compose up -d'
             }
